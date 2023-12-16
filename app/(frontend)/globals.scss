@@ -1,0 +1,74 @@
+@use "./mixins";
+
+:root {
+    /* variables */
+    --primary: white;
+    --secondary: #e7c6f9;
+    --light-background: rgb(241, 240, 240);
+    --include-purple: #3c257e;
+    --dark-background: #0d303b;
+    --dark-background-l: #174857;
+    --dark-background-t: rgba(13, 48, 59, 0.8);
+
+    --text-dark: #0d303b;
+    --text-light: #def6ff;
+
+    /* spacers */
+    --tiny-spacer: 8px;
+    --small-spacer: 16px;
+    --spacer: 24px;
+    --medium-spacer: 48px;
+    --large-spacer: 80px;
+    
+    /* border radius */
+    --b-radius: 8px;
+
+    /* nav */
+    --navbar-height: 80px;
+    --sidebar-width: 300px;
+
+    background-color: var(--light-background);
+    ;
+}
+
+a, button, h1, h2, h3, h4, p , li{
+    font-family: var(--font-montserrat);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+ol, ul {
+    padding-left: 2rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code {
+    font-family: var(--font-chivo);
+}
+
+h1 {
+    font-size: 3rem;
+}
+h2 {
+    font-size: 2.5rem;
+}
+h3 {
+    font-size: 2rem;
+}
+h4 {
+    font-size: 1.5rem;
+}
+p {
+    font-size: 1.1rem;
+    line-height: 2rem;
+}

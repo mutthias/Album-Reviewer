@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
-      "@/*": ["app/*"]
+      "@globals/*": ["./app/(frontend)/_globals/*"],
+      "@components/*": ["./app/(frontend)/_components/*"],
+      "@hooks/*": ["./app/(frontend)/_hooks/*"],
+      "@util/*": ["./app/(backend)/_util/*"]
     }
   }
 }

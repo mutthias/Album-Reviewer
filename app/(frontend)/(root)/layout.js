@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import './globals.scss';
+import '@globals/globals.scss';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -8,6 +8,9 @@ const inter = Inter({
 
 export const metadata = {
   title: 'Next.js Starter Template',
+  icons: {
+    icon: '/icons/icon.ico',
+  },
 };
 
 export default function RootLayout({ children }) {

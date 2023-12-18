@@ -1,0 +1,69 @@
+@use 'app/(pages)/_globals/mixins';
+
+.container {
+    /* box sizing */
+    width: 100%;
+    padding: var(--medium-spacer);
+    background-color: var(--secondary);
+
+    /* flexbox */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--medium-spacer);
+    @include mixins.phone {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+    }
+
+    h2 {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: var(--tiny-spacer);
+    }
+
+    .description>p {
+        @include mixins.phone {
+            display: none;
+        }
+    }
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    gap: var(--medium-spacer);
+
+    @include mixins.phone {
+        flex-direction: column;
+    }
+
+    .learn_more, .projects {
+        display: flex;
+        flex-direction: column;
+
+        .learn_more_links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--tiny-spacer);
+        }
+
+        .project_link_columns {
+            display: flex;
+            flex-direction: row;
+            gap: var(--tiny-spacer);
+            @include mixins.phone {
+                flex-direction: column;
+            }
+
+            >div {
+                display: flex;
+                flex-direction: column;
+                gap: var(--tiny-spacer);
+            }
+        }
+    }
+}

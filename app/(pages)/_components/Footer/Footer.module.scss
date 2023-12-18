@@ -1,10 +1,30 @@
 @use 'app/(pages)/_globals/mixins';
 
 .container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--secondary);
+    .credit {
+        width: 100%;
+        padding: var(--tiny-spacer);
+        text-align: center;
+        background-color: var(--primary);
+        color: var(--text-light);
+        @include mixins.phone {
+            background: none;
+            margin-bottom: var(--medium-spacer);
+            color: var(--text-dark);
+        }
+    }
+}
+
+.content_container {
     /* box sizing */
     width: 100%;
     padding: var(--medium-spacer);
-    background-color: var(--secondary);
 
     /* flexbox */
     display: flex;

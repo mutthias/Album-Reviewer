@@ -4,9 +4,9 @@
     "paths": {
       "@globals/*": ["app/(pages)/_globals/*"],
       "@components/*": ["app/(pages)/_components/*"],
+      "@data/*": ["app/(pages)/_data/*"],
       "@hooks/*": ["app/(pages)/_hooks/*"],
-      "@util/*": ["app/(api)/_util/*"],
-      "@data/*": ["app/(pages)/_data/*"]
+      "@utils/*": ["app/(api)/_utils/*"],
     }
   }
 }

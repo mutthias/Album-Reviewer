@@ -103,13 +103,12 @@ Since we have a `layout.jsx` in the root of the `(pages)` directory, all of our 
 - https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts
 
 ## File Structure
-To keep a maintainable codebase, we will be following strict rules that allow us to keep our codebase organized and clean. In the root of `(pages)`, you will notice that we have four folders:
+To keep a maintainable codebase, we will be following strict rules that allow us to keep our codebase organized and clean. In the root of `(pages)`, you will notice that we have three folders:
 - _components
 - _data
-- _utils
 - _hooks
 
-These four folders should account for every type of file you'll ever need to create. In each subdirectory, for example, `about-us`, we can also have these four folders.
+These three folders should account for every type of file you'll ever need to create. In each subdirectory, for example, `about-us`, we can also have these three folders.
 
 Lets say I want to create the Navbar component. I will first think about which parts of the codebase the navbar is used by. Since the Navbar is a part of every page and called by the root layout, it makes sense to define the Navbar inside the `_components` folder of the root folder.
 

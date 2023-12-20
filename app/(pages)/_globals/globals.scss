@@ -2,13 +2,12 @@
 
 :root {
     /* variables */
-    --primary: white;
+    --include-purple: #3c257e;
+
+    --primary: var(--include-purple);
     --secondary: #e7c6f9;
     --light-background: rgb(241, 240, 240);
-    --include-purple: #3c257e;
     --dark-background: #0d303b;
-    --dark-background-l: #174857;
-    --dark-background-t: rgba(13, 48, 59, 0.8);
 
     --text-dark: #0d303b;
     --text-light: #def6ff;
@@ -23,9 +22,8 @@
     /* border radius */
     --b-radius: 8px;
 
-    /* nav */
+    /* navbar */
     --navbar-height: 80px;
-    --sidebar-width: 300px;
 
     background-color: var(--light-background);
 }
@@ -35,6 +33,7 @@
   padding: 0;
   margin: 0;
   font-family: var(--font-inter);
+  color: var(--text-dark);
 }
 
 a {
@@ -55,6 +54,5 @@ h4 {
     font-size: 1.5rem;
 }
 p {
-    font-size: 1.1rem;
-    line-height: 2rem;
+    font-size: 1rem;
 }

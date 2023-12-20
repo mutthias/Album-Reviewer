@@ -28,6 +28,10 @@
         "max-lines-per-function": "off",
         "react/no-unescaped-entities": "off",
         "react/no-unknown-property": 2,
+        "no-unused-vars": [
+            "error",
+            { "vars": "all", "varsIgnorePattern": "^_*$", "argsIgnorePattern": "^_*$" }
+        ],
         "block-spacing": 1
     }
 }

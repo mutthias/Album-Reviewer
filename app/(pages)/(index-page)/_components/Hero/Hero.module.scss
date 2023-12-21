@@ -1,11 +1,16 @@
+@use 'app/(pages)/_globals/mixins';
+
 .container {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    justify-content: center;
+    height: calc(100vh - var(--navbar-height));
     width: 100%;
     position: relative;
     padding: var(--large-spacer);
-    gap: var(--medium-spacer);
+    @include mixins.phone {
+        padding: var(--medium-spacer);
+    }
 
     .img_container {
         position: absolute;
@@ -18,7 +23,8 @@
     }
 
     .welcome {
-        flex-grow: 1;
+        width: 100%;
+        max-width: 1620px;
         height: 100%;
         border-radius: var(--b-radius);
         border: solid 2px var(--light-background);

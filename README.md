@@ -81,7 +81,7 @@ Now, with App Router, we define pages by creating a directory within the `app` f
 
 To create directories that are guarenteed to never produce a new route in your app, prefix the directory name with `_`, for example: `_components`. You can achieve the same thing by just naming it `components` and ensuring that no `page.jsx` file ever appears in the directory, however, I want to keep things explicit so we will stick with the underscore.
 
-To create groupings of files without affecting the routes, you can wrap your folder name with parenthesis: `(basepage)`. In our codebase, I have done this to seperate the front and backend by creating a grouping for `(api)` and `(pages)`. Notice how `(api)` or `(pages)` never appears in our route when we navigate through the app. I have done this to `(basepage)` to group our page information for the route at `/` inside a folder rather than having it linger in the root of our `(pages)` directory.
+To create groupings of files without affecting the routes, you can wrap your folder name with parenthesis: `(index-page)`. In our codebase, I have done this to seperate the front and backend by creating a grouping for `(api)` and `(pages)`. Notice how `(api)` or `(pages)` never appears in our route when we navigate through the app. I have done this to `(index-page)` to group our page information for the route at `/` inside a folder rather than having it linger in the root of our `(pages)` directory.
 
 ### Resources
 - https://nextjs.org/docs/app/building-your-application/routing/defining-routes
@@ -114,7 +114,7 @@ Lets say I want to create the Navbar component. I will first think about which p
 
 If I want to define a Sidebar that is only used by the `examples` route, and children of the `examples` route, then it makes sense to put the Sidebar component inside the `_components` folder of the `examples` directory. In short, find the level of nesting that accounts for all use cases for your component, data, utils, hooks and define your code in that level.
 
-**Note:** The `layout.jsx` file in the root of `(pages)` sort of breaks the pattern I was talking about. It was supposed to be in the `(basepage)` directory since that handles all of the `/` routes, but a nuance of using the parenthesis to create route groupings forces us to put the `layout.jsx` on layer above. This won't be an issue for other pages however, so just put the `layout.jsx` with the `page.jsx` file.
+**Note:** The `layout.jsx` file in the root of `(pages)` sort of breaks the pattern I was talking about. It was supposed to be in the `(index-page)` directory since that handles all of the `/` routes, but a nuance of using the parenthesis to create route groupings forces us to put the `layout.jsx` on layer above. This won't be an issue for other pages however, so just put the `layout.jsx` with the `page.jsx` file whenever you plan on making a layout for certain routes.
 
 ### Public Folder
 The public folder is where we can store media such as pdfs, images, videos. To keep this organized, create a new folder for each page the content is related to. To access content in the public folder, you don't need to do any of the `../../public` stuff. Next.js automatically routes `/` to the public folder.

@@ -7,7 +7,7 @@ export default function Hero() {
     <div className={styles.container}>
       <div className={styles.img_container}>
         <Image
-          src="/root/city.jpg"
+          src="/index/city.jpg"
           alt="serene forest scene in the night"
           fill
           style={{ objectFit: 'cover', opacity: '0.6' }}

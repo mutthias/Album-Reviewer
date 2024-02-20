@@ -2,12 +2,11 @@
 
 .container {
     width: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     
-    background-color: var(--secondary);
+    background-color: black;
     .credit {
         width: 100%;
         padding: var(--tiny-spacer);

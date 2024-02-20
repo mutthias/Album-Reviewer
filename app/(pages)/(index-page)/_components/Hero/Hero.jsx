@@ -1,21 +1,20 @@
-import Image from 'next/image';
-
-import styles from './Hero.module.scss';
+import './Hero.css';
 
 export default function Hero() {
   return (
-    <div className={styles.container}>
-      <div className={styles.img_container}>
-        <Image
-          src="/index/city.jpg"
-          alt="serene forest scene in the night"
-          fill
-          style={{ objectFit: 'cover', opacity: '0.6' }}
-        />
+    <div className="home-container">
+      <div className="img-container">
+      <div className="welcome">
+        <h1>Spotify Diary</h1>
+        <h2>Log albums you've listened to and rank them</h2>
       </div>
-      <div className={styles.welcome}>
-        <h1>PLATFORM TEAM NEXT.JS TEMPLATE</h1>
+        <video autoPlay muted loop>
+          <source src="/index/sacredsouls.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="overlay"></div> {/* Add a div for the dim overlay */}
       </div>
+      
     </div>
   );
 }

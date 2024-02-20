@@ -8,6 +8,11 @@ $scale: 1.04;
     width: 100%;
 }
 
+.container img {
+    width: 80px;
+    height: 100%;
+}
+
 .container {
     position: fixed;
     z-index: 10;
@@ -20,7 +25,7 @@ $scale: 1.04;
     justify-content: space-between;
     align-items: center;
 
-    background-color: var(--primary);
+    background-color: black;
 
     >h2 {
         color: var(--text-light);

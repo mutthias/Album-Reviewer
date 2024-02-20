@@ -1,4 +1,4 @@
-import '@globals/globals.scss';
+import '@globals/globals.css';
 import fonts from '@globals/fonts';
 import metadata from '@globals/metadata';
 

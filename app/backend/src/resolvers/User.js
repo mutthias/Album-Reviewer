@@ -2,11 +2,10 @@ import Users from "../services/Users.js";
 
 const resolvers = {
   User: {
-    playlists: ({ id }) => Users.getPlaylists({ id }),
+    reviews: ({ id }) => Users.getReviews({ id }),
   },
   Query: {
     user: (_, { id }) => Users.find({ id }),
-    users: (_, { ids }) => Users.findMany({ ids }),
   },
   Mutation: {
     createUser: (_, { input }) => Users.create({ input }),

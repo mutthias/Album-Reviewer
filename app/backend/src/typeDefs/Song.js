@@ -2,7 +2,6 @@ import gql from "graphql-tag";
 
 const typeDefs = gql`
   type Song {
-    id: ID!
     name: String!
     playlists: [Playlist]
   }

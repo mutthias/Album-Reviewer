@@ -61,8 +61,8 @@ export default class Users {
   }
 
   // OTHER
-  static async getPlaylists({ id }) {
-    return prisma.playlist.findMany({
+  static async getReviews({ id }) {
+    return prisma.review.findMany({
       where: {
         userId: id,
       },

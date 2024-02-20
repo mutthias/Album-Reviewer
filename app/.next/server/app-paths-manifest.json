@@ -1,0 +1,4 @@
+{
+  "/(pages)/(index-page)/page": "app/(pages)/(index-page)/page.js",
+  "/(pages)/examples/page": "app/(pages)/examples/page.js"
+}

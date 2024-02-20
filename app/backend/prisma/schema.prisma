@@ -7,39 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Playlist {
-  id        String           @id @default(uuid())
-  name      String
-  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Review {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  content   String
+  title     String
+  score     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   userId    String
-  songs     PlaylistToSong[]
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
-}
 
-model PlaylistToSong {
-  playlistId String
-  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
-  songId     String
-  song       Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@id(name: "id", fields: [playlistId, songId])
-}
-
-model Song {
-  id        String           @id @default(uuid())
-  name      String
-  playlists PlaylistToSong[]
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  // Add a foreign key constraint to ensure each review is related to a user
+  @@index([userId], name: "userId")
 }
 
 model User {
-  id        String     @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  playlists Playlist[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  password  String   @default("defaultPassword")
+  reviews   Review[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

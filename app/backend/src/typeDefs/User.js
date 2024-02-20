@@ -2,9 +2,8 @@ import gql from "graphql-tag";
 
 const typeDefs = gql`
   type User {
-    id: ID!
     name: String!
-    playlists: [Playlist]
+    reviews: [Review]
   }
 
   input UserInput {

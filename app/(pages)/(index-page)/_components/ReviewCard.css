@@ -1,0 +1,14 @@
+.review-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.review-card h2 {
+  margin-bottom: 8px;
+}
+
+.review-card p {
+  margin-bottom: 4px;
+}

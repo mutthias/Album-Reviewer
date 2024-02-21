@@ -2,12 +2,14 @@ import prisma from "../prisma/client.js";
 
 export default class Reviews {
   // CREATE
-  static async create({ userId, input }) {
-    const { name } = input;
+  static async create(input) {
+    const { userId, content, title, score } = input;
     const review = await prisma.review.create({
       data: {
         userId,
-        name,
+        content,
+        title,
+        score,
       },
     });
     return review;
@@ -22,5 +24,11 @@ export default class Reviews {
     return prisma.review.findMany();
   }
 
-
+  static async findByUserId(userId) {
+    return prisma.review.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+  }
 }

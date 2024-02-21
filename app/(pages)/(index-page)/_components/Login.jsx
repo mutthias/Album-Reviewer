@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ReviewCard from './ReviewCard'
 import './Login.css';
 
 function LoginForm({ onLogin }) {
@@ -46,9 +47,52 @@ function LoginForm({ onLogin }) {
 
 export default function Login() {
   const [loggedin, setLoggedIn] = useState(false);
+  const [reviews, setReviews] = useState([]);
+
+  const fetchReviews = async () => {
+    try {
+      const fetchRes = await fetchReviewsFromServer();
+      if (!fetchRes.ok) {
+        throw new Error(`HTTP error! Status: ${fetchRes.status}`);
+      }
+      const reviewsData = await fetchRes.json();
+      console.log('Reviews:', reviewsData);
+      if (reviewsData && reviewsData.data && reviewsData.data.reviews) {
+        setReviews(reviewsData.data.reviews);
+      }
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  };
+
+  useEffect(() => {
+    console.log('Updated reviews:', reviews);
+  }, [reviews]);
+
+  const fetchReviewsFromServer = async () => {
+    try {
+      const fetchRes = await fetch(`http://localhost:9001/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: ReviewQuery,
+          variables: {
+            ids: 'd99e2af2-11a1-4783-acf7-98d0542bb988',
+          },
+        }),
+      });
+      return fetchRes;
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      throw error;
+    }
+  };
 
   const handleLogin = () => {
     setLoggedIn(true);
+    fetchReviews();
   };
 
   const handleLogout = () => {
@@ -62,13 +106,44 @@ export default function Login() {
         <div>
           <p>Logged in</p>
           <button onClick={handleLogout}>Logout</button>
+          <div>
+            {reviews.map((review, index) => (
+              <ReviewCard
+                key={index}
+                title={review.title}
+                content={review.content}
+                score={review.score}
+                createdAt={review.createdAt}
+              />
+            ))}
+          </div>
         </div>
       ) : (
-        <div className='Login'>
+        <div className="Login">
           <h1>Login to create and view your reviews!</h1>
-          <LoginForm onLogin={handleLogin} />
+          <LoginForm
+            onLogin={() => {
+              handleLogin();
+            }}
+          />
         </div>
       )}
     </main>
   );
 }
+
+const ReviewQuery = `
+  query Query($ids: ID!) {
+    reviews(ids: $ids) {
+      content
+      createdAt
+      score
+      id
+      title
+      updatedAt
+      user {
+        name
+      }
+    }
+  }
+`;

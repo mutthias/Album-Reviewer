@@ -1,3 +1,4 @@
+// Resolver
 import Review from "../services/Review.js";
 import Users from "../services/Users.js";
 
@@ -7,11 +8,10 @@ const resolvers = {
   },
   Query: {
     review: (_, { id }) => Review.find({ id }),
-    reviews: () => Review.findAll(),
+    reviews: (_, { userId }) => Review.findByUserId(userId),
   },
   Mutation: {
-    createReview: (_, { userId, input }) =>
-      Review.create({ userId, input }),
+    createReview: (_, { input }) => Review.create(input),
   },
 };
 export default resolvers;

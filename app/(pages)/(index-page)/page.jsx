@@ -1,13 +1,14 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Hero from './_components/Hero/Hero';
 import Login from './_components/Login';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [loggedin, setLoggedIn] = useState(false);
   const [token, setToken] = useState('');
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     let token = window.localStorage.getItem('token');
@@ -34,15 +35,6 @@ export default function Home() {
     const requestBody = new URLSearchParams();
     requestBody.append('grant_type', 'client_credentials');
 
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${basicAuth}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      data: requestBody,
-    };
-
     try {
       const response = await axios.post(tokenEndpoint, requestBody, {
         headers: {
@@ -55,12 +47,6 @@ export default function Home() {
     } catch (error) {
       console.error('Error fetching token:', error);
     }
-  };
-
-  const handleClick = async () => {
-    const token = await getToken();
-    console.log('heres the token:', token);
-    // Do something with the token
   };
 
   return (

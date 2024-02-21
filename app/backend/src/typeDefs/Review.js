@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Query {
     review(id: String!): Review
-    reviews: [Review!]!
+    reviews(ids: ID!): [Review]
   }
 
   type Mutation {

@@ -4,8 +4,8 @@ import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import Image from 'next/image';
 
 import styles from './Navbar.module.scss';
-import useToggle from '@hooks/useToggle';
-import Logo from '../../../../public/index/relaxation.png'; 
+import useToggle from '../../_hooks/useToggle';
+import Logo from '../../../../public/index/relaxation.png';
 
 export default function Navbar({ navLinks }) {
   const [active, toggleActive, _, setInactive] = useToggle(false);

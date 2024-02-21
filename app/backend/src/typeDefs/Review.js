@@ -2,25 +2,31 @@ import gql from "graphql-tag";
 
 const typeDefs = gql`
   type Review {
-    id: ID
-    name: String!
-    user: User
-    userId: ID
-    songs: [Song]
+    id: String!
+    user: User!
+    content: String!
+    title: String!
+    score: Int!
+    createdAt: String!
+    updatedAt: String!
   }
 
-  input ReviewInput {
-    name: String!
+  input CreateReviewInput {
+    userId: String!
+    content: String!
+    title: String!
+    score: Int!
   }
 
   type Query {
-    review(id: ID!): Review
-    review: [Review]
+    review(id: String!): Review
+    reviews: [Review!]!
   }
 
   type Mutation {
-    createPlaylist(userId: ID!, input: PlaylistInput!): Playlist
-    addSong(playlistId: ID!, songId: ID!): Boolean
+    createReview(input: CreateReviewInput!): Review!
+    deleteReview(id: String!): Boolean
   }
+
 `;
 export default typeDefs;

@@ -1,5 +1,4 @@
 import User from "./User.js";
-import Playlist from "./Review.js";
-import Song from "./Song.js";
+import Review from "./Review.js";
 
-export default [User, Playlist, Song];
+export default [User, Review];

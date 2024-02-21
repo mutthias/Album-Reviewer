@@ -1,7 +1,7 @@
 model User {
   id          String        @id @default(uuid())
   name        String
-  password    String        @default("defaultPassword")
+  password    String        
   reviews     Review[]    
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt

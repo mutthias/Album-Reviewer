@@ -2,15 +2,15 @@ import Users from "../services/Users.js";
 
 const resolvers = {
   User: {
-    reviews: ({ id }) => Users.getReviews({ id }),
+    reviews: ({ name }) => Users.getReviews({ name }),
   },
   Query: {
-    user: (_, { id }) => Users.find({ id }),
+    user: (_, { name }) => Users.find({ name }),
   },
   Mutation: {
     createUser: (_, { input }) => Users.create({ input }),
-    updateUser: (_, { id, input }) => Users.update({ id, input }),
-    deleteUser: (_, { id }) => Users.delete({ id }),
+    updateUser: (_, { name, input }) => Users.update({ name, input }),
+    deleteUser: (_, { name }) => Users.delete({ name }),
   },
 };
 

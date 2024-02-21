@@ -3,10 +3,11 @@ import prisma from "../prisma/client.js";
 export default class Users {
   // CREATE
   static async create({ input }) {
-    const { name } = input;
+    const { name, password } = input;
     const user = await prisma.user.create({
       data: {
         name,
+        password,
       },
     });
     return user;

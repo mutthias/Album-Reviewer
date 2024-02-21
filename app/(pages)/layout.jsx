@@ -1,9 +1,9 @@
-import '@globals/globals.css';
-import fonts from '@globals/fonts';
-import metadata from '@globals/metadata';
+import './_globals/globals.css';
+import fonts from './_globals/fonts';
+import metadata from './_globals/metadata.json';
 
-import navLinks from '@data/navLinks.json';
-import Navbar from '@components/Navbar/Navbar';
+import navLinks from './_data/navLinks.json';
+import Navbar from './_components/Navbar/Navbar';
 import Footer from './_components/Footer/Footer';
 
 export { metadata };

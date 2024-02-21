@@ -3,11 +3,13 @@ import gql from "graphql-tag";
 const typeDefs = gql`
   type User {
     name: String!
+    password: String!
     reviews: [Review]
   }
 
   input UserInput {
     name: String!
+    password: String!
   }
 
   type Query {

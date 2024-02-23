@@ -9,6 +9,8 @@ const typeDefs = gql`
     score: Int!
     createdAt: String!
     updatedAt: String!
+    image: String
+    artist: String
   }
 
   input CreateReviewInput {
@@ -16,11 +18,13 @@ const typeDefs = gql`
     content: String!
     title: String!
     score: Int!
+    image: String!
+    artist: String!
   }
 
   type Query {
     review(id: String!): Review
-    reviews(ids: ID!): [Review]
+    reviewsByUserId(userId: String!): [Review] 
   }
 
   type Mutation {

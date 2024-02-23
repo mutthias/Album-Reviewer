@@ -6,6 +6,7 @@ const resolvers = {
   },
   Query: {
     user: (_, { id }) => Users.find({ id }),
+    userByName: (_, { name }) => Users.findByName({ name }),
   },
   Mutation: {
     createUser: (_, { input }) => Users.create({ input }),

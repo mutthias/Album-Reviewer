@@ -2,6 +2,9 @@
 const nextConfig = {};
 
 module.exports = {
+  images: {
+    domains: ['i.scdn.co'],
+  },
   nextConfig,
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',

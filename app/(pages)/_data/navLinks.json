@@ -4,15 +4,11 @@
       "slug": "/"
     },
     {
-      "name": "About Us",
+      "name": "Top 10 Analysis",
       "slug": "/about"
     },
     {
-      "name": "Examples",
+      "name": "About",
       "slug": "/examples"
-    },
-    {
-      "name": "Contact Us",
-      "slug": "/contact"
     }
   ]

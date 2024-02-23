@@ -1,14 +1,141 @@
 .review-card {
+  display: flex; 
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 16px;
   margin-bottom: 16px;
+  width: 100%;
+  height: 150px;
+  background-color: #eae0d5;
+  transition: opacity 0.5s; /* Add transition for opacity */
+}
+
+.dim-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  z-index: 999; /* Ensure it's above other elements */
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.5s; /* Add transition for opacity */
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #faedcd;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 30rem;
+  max-width: 100%;
+  max-height: 80vh; /* Limit maximum height to 80% of viewport height */
+  overflow: auto; /* Enable scrolling if content exceeds popup size */
+  z-index: 9999;
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.5s; /* Add transition for opacity */
+}
+
+.active-popup .popup {
+  opacity: 1; /* Fade in */
+}
+
+.active-popup .dim-background {
+  opacity: 1; /* Fade in */
+}
+
+
+.review-details {
+  flex: 1; 
+  padding: 16px; /* Add padding to this div */
+}
+
+.review-image {
+  width: 50%; /* Set width to the desired size */
+  height: 100%; /* Maintain height */
+  padding: 0; /* No padding for the image div */
+  overflow: hidden; /* Hide overflow if image is larger */
+  position: relative; /* Position for absolute image */
+}
+
+.review-image img {
+  width: 50%; /* Set image width to take up half of the container */
+  height: 100%; /* Set image height to fill container */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  border-radius: 8px; /* Apply border-radius */
+  position: absolute; /* Position the image absolutely */
+  top: 0; /* Align to top */
+  right: 0; /* Align to right */
+  z-index: 1;
+}
+
+.review-card h1 {
+  margin-bottom: 8px;
+  font-size: 16px; /* Adjust font size as needed */
+  color: black
 }
 
 .review-card h2 {
   margin-bottom: 8px;
+  font-size: 12px; /* Adjust font size as needed */
+  color: black;
 }
 
 .review-card p {
   margin-bottom: 4px;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Add ellipsis for truncated text */
+  color: grey;
+
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #faedcd;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 30rem;
+  max-width: 100%;
+  max-height: 80vh; /* Limit maximum height to 80% of viewport height */
+  overflow: auto; /* Enable scrolling if content exceeds popup size */
+  z-index: 9999;
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.5s; /* Add transition for opacity */
+}
+.popup.fade-in {
+  opacity: 1; /* Fade in */
+}
+
+.popup h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  white-space: normal; /* Allow wrapping of text */
+}
+
+.popup .popup-image img {
+  width: 100%; /* Image takes full width of popup */
+  max-height: 80%; /* Limit maximum height of image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px;
+  position: relative !important;
+  object-fit: contain;
+  
+}
+
+.full-content {
+  max-height: 40vh; /* Limit maximum height of content */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
 }

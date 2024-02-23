@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react';
-import ReviewCard from './ReviewCard'
+import axios from 'axios';
+import ReviewCard from './ReviewCard';
+import CreateReview from './CreateReview';
 import './Login.css';
 
-function LoginForm({ onLogin }) {
+function LoginForm({ onLogin, loginError }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Validate username and password
     if (username && password) {
-      // Perform login logic (e.g., validate credentials, obtain token)
-      // For simplicity, let's assume login is successful and set loggedin to true
-      onLogin();
+      onLogin(username, password);
     } else {
       alert('Please enter both username and password.');
     }
   };
 
   return (
-    <div className='login-container'>
+    <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
@@ -39,6 +38,7 @@ function LoginForm({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {loginError && <p className="error-message">{loginError}</p>}
         <button type="submit">Login</button>
       </form>
     </div>
@@ -48,17 +48,47 @@ function LoginForm({ onLogin }) {
 export default function Login() {
   const [loggedin, setLoggedIn] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [token, setToken] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [id, setID] = useState('');
+  const [showCreateReview, setShowCreateReview] = useState(false); // State to control CreateReview visibility
 
-  const fetchReviews = async () => {
+  const client_id = '630ad8f7543b4b4990ef2056f872020b';
+  const client_secret = '1d45d3faf2c845329f213118230a8090';
+
+  const getToken = async () => {
+    const tokenEndpoint = 'https://accounts.spotify.com/api/token';
+    const basicAuth = btoa(`${client_id}:${client_secret}`);
+    const requestBody = new URLSearchParams();
+    requestBody.append('grant_type', 'client_credentials');
     try {
-      const fetchRes = await fetchReviewsFromServer();
+      const response = await axios.post(tokenEndpoint, requestBody, {
+        headers: {
+          Authorization: `Basic ${basicAuth}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+      const accessToken = response.data.access_token;
+      window.localStorage.setItem('token', accessToken);
+      setToken(accessToken, () => {
+        console.log(accessToken);
+      });
+      return accessToken;
+    } catch (error) {
+      console.error('Error fetching token:', error);
+    }
+  };
+
+  const fetchReviews = async (id) => {
+    try {
+      const fetchRes = await fetchReviewsFromServer(id);
       if (!fetchRes.ok) {
         throw new Error(`HTTP error! Status: ${fetchRes.status}`);
       }
       const reviewsData = await fetchRes.json();
-      console.log('Reviews:', reviewsData);
-      if (reviewsData && reviewsData.data && reviewsData.data.reviews) {
-        setReviews(reviewsData.data.reviews);
+      if (reviewsData && reviewsData.data && reviewsData.data.user.reviews) {
+        setReviews(reviewsData.data.user.reviews);
+        console.log('hi', reviewsData);
       }
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -66,10 +96,18 @@ export default function Login() {
   };
 
   useEffect(() => {
-    console.log('Updated reviews:', reviews);
-  }, [reviews]);
+    let login = window.localStorage.getItem('loggedIn');
+    let userID = window.localStorage.getItem('id');
+    if (login && userID) {
+      console.log('Logged in!');
+      setLoggedIn(true);
+      fetchReviews(userID);
+    } else {
+      console.log('need to login!');
+    }
+  }, []);
 
-  const fetchReviewsFromServer = async () => {
+  const fetchReviewsFromServer = async (id) => {
     try {
       const fetchRes = await fetch(`http://localhost:9001/graphql`, {
         method: 'POST',
@@ -79,7 +117,7 @@ export default function Login() {
         body: JSON.stringify({
           query: ReviewQuery,
           variables: {
-            ids: 'd99e2af2-11a1-4783-acf7-98d0542bb988',
+            userId: `${id}`,
           },
         }),
       });
@@ -90,23 +128,84 @@ export default function Login() {
     }
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
-    fetchReviews();
+  const handleLogin = async (username, password) => {
+    try {
+      const fetchRes = await fetch(`http://localhost:9001/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: LoginQuery,
+          variables: {
+            name: `${username}`,
+          },
+        }),
+      });
+
+      if (!fetchRes.ok) {
+        throw new Error(`HTTP error! Status: ${fetchRes.status}`);
+      }
+
+      console.log(password);
+      const data = await fetchRes.json(); // Parse response data
+
+      if (!data.data.userByName) {
+        setLoginError('No user found!');
+        return;
+      }
+
+      if (data.data.userByName.password !== password) {
+        setLoginError('Incorrect password!');
+        return;
+      }
+
+      setLoginError('');
+      setLoggedIn(true);
+      window.localStorage.setItem('loggedIn', true);
+      const userID = data.data.userByName.id;
+      window.localStorage.setItem('id', userID);
+      setID(userID);
+      fetchReviews(userID);
+      console.log(userID); // Use the variable instead of state
+      return data; // Return fetched data
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      throw error;
+    }
   };
 
   const handleLogout = () => {
     setLoggedIn(false);
+    setReviews([]);
+    setID('');
     window.localStorage.removeItem('token');
+    window.localStorage.removeItem('loggedIn');
+    window.localStorage.removeItem('id');
   };
 
   return (
     <main>
       {loggedin ? (
-        <div>
-          <p>Logged in</p>
-          <button onClick={handleLogout}>Logout</button>
-          <div>
+        <div className="reviews-wrapper">
+          {reviews.length === 0 && (
+            <h1 className="no-reviews-message">
+              Start by creating your first review!
+            </h1>
+          )}
+          <div className="button-container">
+            <button
+              className="create-review-button"
+              onClick={() => setShowCreateReview(!showCreateReview)}
+            >
+              Create Review
+            </button>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+          {showCreateReview && <CreateReview />}
+          <div className="reviews">
             {reviews.map((review, index) => (
               <ReviewCard
                 key={index}
@@ -114,6 +213,9 @@ export default function Login() {
                 content={review.content}
                 score={review.score}
                 createdAt={review.createdAt}
+                image={review.image}
+                artist={review.artist}
+                id={review.id}
               />
             ))}
           </div>
@@ -122,9 +224,11 @@ export default function Login() {
         <div className="Login">
           <h1>Login to create and view your reviews!</h1>
           <LoginForm
-            onLogin={() => {
-              handleLogin();
+            onLogin={(username, password) => {
+              handleLogin(username, password);
+              getToken();
             }}
+            loginError={loginError}
           />
         </div>
       )}
@@ -133,17 +237,28 @@ export default function Login() {
 }
 
 const ReviewQuery = `
-  query Query($ids: ID!) {
-    reviews(ids: $ids) {
-      content
-      createdAt
-      score
-      id
-      title
-      updatedAt
-      user {
-        name
+  query Query($userId: ID!) {
+    user(id: $userId) {
+      reviews {
+        content
+        id
+        createdAt
+        score
+        title
+        updatedAt
+        image
+        artist
       }
+    }
+}
+`;
+
+const LoginQuery = `
+  query Query($name: String!) {
+    userByName(name: $name) {
+      id
+      name
+      password
     }
   }
 `;

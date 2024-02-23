@@ -7,6 +7,8 @@ model Review {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   userId      String   
+  image       String    @default("https://i.scdn.co/image/ab67616d00001e0262c1f3370811c52ae2d26d24")
+  artist      String    @default("Artist")
   
   // Add a foreign key constraint to ensure each review is related to a user
   @@index([userId], name: "userId")

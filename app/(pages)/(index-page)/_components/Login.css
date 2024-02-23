@@ -48,3 +48,58 @@
   display: flex;
   justify-content: center
 }
+
+.reviews-wrapper {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+
+
+.reviews {
+  width: 100%;
+}
+
+.no-reviews-message {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%; /* Ensure the container takes full width */
+}
+
+.create-review-button,
+.logout-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.create-review-button {
+  background-color: #ddbea9;
+  color: grey;
+  margin-right: auto; /* Push Create Review button to the left */
+}
+
+.logout-button {
+  background-color: #ddbea9;
+  color: grey;
+  margin-left: auto; /* Push Logout button to the right */
+}
+
+.create-review-button:hover,
+.logout-button:hover {
+  opacity: 0.8;
+}

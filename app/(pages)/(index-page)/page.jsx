@@ -26,29 +26,6 @@ export default function Home() {
     window.localStorage.removeItem('token');
   };
 
-  const client_id = '630ad8f7543b4b4990ef2056f872020b';
-  const client_secret = '1d45d3faf2c845329f213118230a8090';
-
-  const getToken = async () => {
-    const tokenEndpoint = 'https://accounts.spotify.com/api/token';
-    const basicAuth = btoa(`${client_id}:${client_secret}`);
-    const requestBody = new URLSearchParams();
-    requestBody.append('grant_type', 'client_credentials');
-
-    try {
-      const response = await axios.post(tokenEndpoint, requestBody, {
-        headers: {
-          Authorization: `Basic ${basicAuth}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-      const accessToken = response.data.access_token;
-      return accessToken;
-    } catch (error) {
-      console.error('Error fetching token:', error);
-    }
-  };
-
   return (
     <main>
       <Hero />

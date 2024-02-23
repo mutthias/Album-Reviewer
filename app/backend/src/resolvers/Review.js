@@ -8,10 +8,11 @@ const resolvers = {
   },
   Query: {
     review: (_, { id }) => Review.find({ id }),
-    reviews: (_, { userId }) => Review.findByUserId(userId),
+    reviewsByUserId: (_, { userId }) => Review.findByUserId(),
   },
   Mutation: {
     createReview: (_, { input }) => Review.create(input),
+    deleteReview: (_, { id }) => Review.delete({ id }),
   },
 };
 export default resolvers;

@@ -22,6 +22,16 @@ export default class Users {
     });
   }
 
+  static async findByName({ name }) {
+    return prisma.user.findFirst({
+      where: {
+        name: {
+          equals: name,
+        },
+      },
+    });
+  }
+
   static async findMany({ ids }) {
     return prisma.user.findMany({
       where: {

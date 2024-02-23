@@ -103,29 +103,51 @@ const CreateReview = ({ onSubmit }) => {
   };
   
   return (
-    <div className={`review-card ${showPopup ? 'active-popup' : ''}`} onClick={togglePopup}>
-      <div className="review-details">
-        <h1>{title}</h1>
-        <h2 className="artist">{artist}</h2>
-        <p>{content.length > 20 ? `${content.slice(0, 35)}...` : content}</p>
-        <p>Score: {score}</p>
-        <button className="remove-button" onClick={handleDelete}>Remove</button>
-      </div>
-      <div className="review-image">
-        <Image fill src={image} alt="nada" />
-      </div>
-      {showPopup && (
-        <div className="popup">
-          <h2>{title}</h2>
-          <p className="artist">{artist}</p>
-          <div className="popup-image">
-            <Image fill src={image} alt="nada" />
-          </div>
-          <p className="full-content">{content}</p>
-        </div>
-      )}
-      {showPopup && <div className="dim-background" onClick={togglePopup}></div>}
-    </div>
+    <form className="create-review-form" onSubmit={handleSubmit}>
+      <label htmlFor="title">Album Title:</label>
+      <input
+        type="text"
+        id="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        onFocus={() => handleSearch(title)}
+        placeholder="Search for an album..."
+        required
+      />
+
+      {/* Display search results */}
+      <ul className="search-results">
+        {searchResults.map((album) => (
+          <li className="search-result" key={album.id} onClick={() => handleClick(album)}>
+            <img className="album-image" src={album.images[0].url} alt={album.name} />
+            <div className="album-info">
+              <span className="album-name">{album.name}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <label htmlFor="score">Score (0-100):</label>
+      <input
+        type="number"
+        id="score"
+        value={score}
+        onChange={(e) => setScore(parseInt(e.target.value))}
+        min="0"
+        max="100"
+        required
+      />
+
+      <label htmlFor="review">Review:</label>
+      <textarea
+        id="review"
+        value={review}
+        onChange={(e) => setReview(e.target.value)}
+        required
+      ></textarea>
+
+      <button type="submit">Submit Review</button>
+    </form>
   );
 };
 

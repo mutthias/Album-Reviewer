@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewCard from './ReviewCard';
 import CreateReview from './CreateReview';
@@ -216,6 +216,7 @@ export default function Login() {
                 image={review.image}
                 artist={review.artist}
                 id={review.id}
+                style={{ animationDelay: `${index * 0.1}s` }}
               />
             ))}
           </div>
@@ -262,3 +263,4 @@ const LoginQuery = `
     }
   }
 `;
+

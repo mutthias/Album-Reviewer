@@ -4,11 +4,7 @@
       "slug": "/"
     },
     {
-      "name": "Top 10 Analysis",
-      "slug": "/about"
-    },
-    {
       "name": "About",
-      "slug": "/examples"
+      "slug": "/about"
     }
   ]

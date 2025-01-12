@@ -5,8 +5,8 @@ export default function Hero() {
     <div className="home-container">
       <div className="img-container">
         <div className="welcome">
-          <h1>Spotify Diary</h1>
-          <h2>Log albums you've listened to and rank them</h2>
+          <h1>Spotify Album Logger</h1>
+          <h2>Log albums you've listened to and rank them.</h2>
         </div>
         <video autoPlay muted loop>
           <source src="/index/sacredsouls.mp4" type="video/mp4" />

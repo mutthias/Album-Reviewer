@@ -13,21 +13,21 @@ you've listened to, give it a score, and write a review/anecdote as to why you l
 
 
 To run start the web application, cd into the app directory, then run the following:
-> `npm install`
-> `npm run dev`
+`npm install`
+`npm run dev`
 
 To run the Apollo webserver, Ensure you have cd into the `backend` directory, and run the following commands:
 
-> `npm install -g nodemon`
-> `npm run dev`
+`npm install -g nodemon`
+`npm run dev`
 
 This will run the Apollo server using nodemon. 
 
 Finally, ensure the database is synced using the Prisma ORM. Run this to install Prisma:
 
-> `npm install @prisma/client`
+`npm install @prisma/client`
 
 And then run the following to sync the database:
 
-> `npx prisma generate`
-> `npx prisma db push`
+`npx prisma generate`
+`npx prisma db push`
